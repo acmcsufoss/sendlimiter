@@ -44,10 +44,10 @@ func main() {
 	// Add the needed Gateway intents.
 	s.AddIntents(gateway.IntentGuildMessages)
 
-	if err := s.Open(context.Background()); err != nil {
+	// Open a connection to Discord.
+	if err := s.Connect(context.Background()); err != nil {
 		log.Fatalln("Failed to connect:", err)
 	}
-	defer s.Close()
 
 	u, err := s.Me()
 	if err != nil {
