@@ -2,7 +2,10 @@ module oss.acmcsuf.com/sendlimiter
 
 go 1.19
 
-require github.com/diamondburned/arikawa/v3 v3.3.1
+require (
+	github.com/diamondburned/arikawa/v3 v3.3.1
+	golang.org/x/exp v0.0.0-20230626212559-97b1e661b5df
+)
 
 require (
 	github.com/gorilla/schema v1.2.0 // indirect

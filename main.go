@@ -5,7 +5,9 @@ import (
 	"flag"
 	"log"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 
 	"github.com/diamondburned/arikawa/v3/gateway"
 	"github.com/diamondburned/arikawa/v3/session"
@@ -56,8 +58,19 @@ func main() {
 
 	log.Println("Started as", u.Username)
 
-	// Block forever.
-	select {}
+	// Set up a context that gets canceled on interrupt signal.
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer cancel()
+
+	// Run the program until the context is canceled.
+	<-ctx.Done()
+
+	log.Println("Shutting down...")
+
+	// Clean up resources and close the Discord connection.
+	if err := s.Close(); err != nil {
+		log.Println("Failed to close the session:", err)
+	}
 }
 
 // parseChannelIDsFromArgs parses the channel IDs from the command arguments.
