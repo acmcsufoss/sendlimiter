@@ -43,7 +43,6 @@ func main() {
 
 	// Add the needed Gateway intents.
 	s.AddIntents(gateway.IntentGuildMessages)
-	s.AddIntents(gateway.IntentDirectMessages)
 
 	if err := s.Open(context.Background()); err != nil {
 		log.Fatalln("Failed to connect:", err)
