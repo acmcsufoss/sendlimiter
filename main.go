@@ -9,6 +9,7 @@ import (
 
 	"github.com/diamondburned/arikawa/v3/gateway"
 	"github.com/diamondburned/arikawa/v3/session"
+	"golang.org/x/exp/slices"
 )
 
 var channelIDs []string
@@ -25,7 +26,7 @@ func main() {
 	s := session.New("Bot " + token)
 	s.AddHandler(func(c *gateway.MessageCreateEvent) {
 		// Check if the message is in one of the specified channel IDs.
-		if !contains(channelIDs, c.ChannelID.String()) {
+		if !slices.Contains(channelIDs, c.ChannelID.String()) {
 			return
 		}
 
@@ -70,14 +71,4 @@ func parseChannelIDsFromArgs(args []string) []string {
 		}
 	}
 	return channelIDs
-}
-
-// contains checks if a string slice contains a specific string.
-func contains(slice []string, str string) bool {
-	for _, s := range slice {
-		if s == str {
-			return true
-		}
-	}
-	return false
 }
