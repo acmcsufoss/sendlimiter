@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"regexp"
 	"strings"
 	"syscall"
 
@@ -13,6 +14,9 @@ import (
 	"github.com/diamondburned/arikawa/v3/session"
 	"golang.org/x/exp/slices"
 )
+
+// EMBED_URL_REGEX is a regular expression that matches embed URLs.
+var EMBED_URL_REGEX = regexp.MustCompile(`(?<!<)(https?|ftp)://[^\s/$.?#].[^\s]*(?!>)`)
 
 var channelIDs []string
 
@@ -33,7 +37,7 @@ func main() {
 		}
 
 		// Check if the message has attachments.
-		if c.Message.Attachments == nil {
+		if c.Message.Attachments == nil || containsEmbeds(c) {
 			return
 		}
 
@@ -83,4 +87,17 @@ func parseChannelIDsFromArgs(args []string) []string {
 		}
 	}
 	return channelIDs
+}
+
+// containsEmbeds checks if the message contains embeds regular expressions.
+func containsEmbeds(c *gateway.MessageCreateEvent) bool {
+	if c.Message.Embeds != nil {
+		return true
+	}
+
+	if c.Message.Content != "" {
+		return EMBED_URL_REGEX.MatchString(c.Message.Content)
+	}
+
+	return false
 }
