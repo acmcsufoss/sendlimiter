@@ -30,8 +30,7 @@ func main() {
 		}
 
 		// Check if the message has attachments.
-		emptyAttachments := c.Message.Attachments == nil || len(c.Message.Attachments) == 0
-		if !emptyAttachments {
+		if c.Message.Attachments == nil {
 			return
 		}
 
