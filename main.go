@@ -12,6 +12,7 @@ import (
 
 	"github.com/diamondburned/arikawa/v3/gateway"
 	"github.com/diamondburned/arikawa/v3/session"
+	"github.com/joho/godotenv"
 	"golang.org/x/exp/slices"
 )
 
@@ -24,6 +25,10 @@ var EMBED_URL_REGEX = regexp.MustCompile(`(https?|ftp)://[^\s/$.?#].[^\s]*`)
 var channelIDs []string
 
 func main() {
+	if err := godotenv.Load(); err != nil {
+		log.Println("warning: failed to load .env:", err)
+	}
+
 	var token = os.Getenv("BOT_TOKEN")
 	if token == "" {
 		log.Fatalln("No $BOT_TOKEN given.")
