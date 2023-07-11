@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/diamondburned/arikawa/v3 v3.3.1
+	github.com/joho/godotenv v1.5.1
 	golang.org/x/exp v0.0.0-20230626212559-97b1e661b5df
 )
 
