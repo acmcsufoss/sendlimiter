@@ -73,6 +73,8 @@ func main() {
 	// Add the needed Gateway intents.
 	s.AddIntents(gateway.IntentGuildMessages)
 	s.AddIntents(gateway.IntentMessageContent)
+	s.AddIntents(gateway.IntentDirectMessages)
+	s.AddIntents(gateway.IntentGuildMessages)
 
 	// Get the bot's user.
 	u, err := s.Me()
