@@ -16,7 +16,10 @@ import (
 )
 
 // EMBED_URL_REGEX is a regular expression that matches embed URLs.
-var EMBED_URL_REGEX = regexp.MustCompile(`(?<!<)(https?|ftp)://[^\s/$.?#].[^\s]*(?!>)`)
+//
+// Choose your fighter:
+// https://mathiasbynens.be/demo/url-regex
+var EMBED_URL_REGEX = regexp.MustCompile(`(https?|ftp)://[^\s/$.?#].[^\s]*`)
 
 var channelIDs []string
 
