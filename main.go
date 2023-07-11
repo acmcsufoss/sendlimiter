@@ -15,9 +15,9 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// EMBED_URL_REGEX is a regular expression that matches embed URLs.
+// embedRegex is a regular expression that matches embed URLs.
 // https://mathiasbynens.be/demo/url-regex
-var EMBED_URL_REGEX = regexp.MustCompile(`(https?|ftp):\/\/[^\s\/$.?#].[^\s]*`)
+var embedRegex = regexp.MustCompile(`(https?|ftp):\/\/[^\s\/$.?#].[^\s]*`)
 
 func main() {
 	// Load the .env file.
@@ -95,5 +95,5 @@ func containsEmbeds(c *gateway.MessageCreateEvent) bool {
 		return true
 	}
 
-	return EMBED_URL_REGEX.MatchString(c.Message.Content)
+	return embedRegex.MatchString(c.Message.Content)
 }
