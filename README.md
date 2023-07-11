@@ -1,6 +1,7 @@
 # sendlimiter
 
-Discord bot that limits the ability to send messages in a channel given criteria.
+Discord bot that limits the ability to send messages in a channel given
+criteria.
 
 ## Development
 
@@ -14,11 +15,15 @@ go run main.go
 
 ### Invite
 
-Invite the bot to your server via <https://discord.com/developers/applications/> by creating a new application, adding a bot, and then using the OAuth2 tab to generate an invite link.
+Invite the bot to your server via <https://discord.com/developers/applications/>
+by creating a new application, adding a bot, and then using the OAuth2 tab to
+generate an invite link.
 
 ### acm-aws
 
-[acm-aws](https://github.com/diamondburned/acm-aws#readme) contains the Terraform deployment files for ACM at CSUF. It uses Terraform and Nix to orchestrate cloud servers.
+[acm-aws](https://github.com/diamondburned/acm-aws#readme) contains the
+Terraform deployment files for ACM at CSUF. It uses Terraform and Nix to
+orchestrate cloud servers.
 
 ---
 
