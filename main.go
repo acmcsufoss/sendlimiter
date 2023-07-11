@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/signal"
 	"regexp"
-	"strings"
 	"syscall"
 
 	"github.com/diamondburned/arikawa/v3/gateway"
@@ -35,7 +34,7 @@ func main() {
 	}
 
 	flag.Parse()
-	channelIDs = parseChannelIDsFromArgs(flag.Args())
+	channelIDs = flag.Args()
 
 	s := session.New("Bot " + token)
 	s.AddHandler(func(c *gateway.MessageCreateEvent) {
@@ -44,8 +43,8 @@ func main() {
 			return
 		}
 
-		// Check if the message has attachments.
-		if c.Message.Attachments == nil || containsEmbeds(c) {
+		// Check if the message has attachments or embeds.
+		if c.Message.Attachments != nil || containsEmbeds(c) {
 			return
 		}
 
@@ -83,18 +82,6 @@ func main() {
 	if err := s.Close(); err != nil {
 		log.Println("Failed to close the session:", err)
 	}
-}
-
-// parseChannelIDsFromArgs parses the channel IDs from the command arguments.
-func parseChannelIDsFromArgs(args []string) []string {
-	var channelIDs []string
-	for _, arg := range args {
-		if strings.HasPrefix(arg, "channel:") {
-			channelID := strings.TrimPrefix(arg, "channel:")
-			channelIDs = append(channelIDs, channelID)
-		}
-	}
-	return channelIDs
 }
 
 // containsEmbeds checks if the message contains embeds regular expressions.
