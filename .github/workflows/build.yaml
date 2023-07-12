@@ -53,6 +53,9 @@ jobs:
             exit 1
           fi
 
+      - name: Install staticcheck
+        run: go get honnef.co/go/tools/cmd/staticcheck@latest
+
       - name: Vet
         run: |
           go vet ./...
