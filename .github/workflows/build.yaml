@@ -13,13 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Nix packages
-        id: nix-install
-        uses: diamondburned/cache-install@352b0de529729f8a52485442ae9a0b54c95f8f78
-        with:
-          shell-file: shell.nix
-          nix-path: nixpkgs=channel:nixos-unstable
-
       - name: Cache Go Modules
         uses: actions/cache@v3
         with:
