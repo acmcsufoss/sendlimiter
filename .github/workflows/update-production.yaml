@@ -1,0 +1,23 @@
+name: Build and Update on production
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yaml
+    secrets: inherit
+
+  dispatch:
+    name: Dispatch to acm-aws
+    needs: build
+    runs-on: ubuntu-latest
+    environment: Production
+    concurrency: Production
+    steps:
+      - name: Dispatch workflow
+        uses: diamondburned/acm-aws/.github/actions/update-pkg@ebd2958df9430fbbf45a00efb1d2287db154f34e
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          package: sendlimiter
