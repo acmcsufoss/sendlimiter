@@ -18,7 +18,7 @@ import (
 
 // embedRegex is a regular expression that matches embed URLs.
 // https://mathiasbynens.be/demo/url-regex
-var embedRegex = regexp.MustCompile(`(https?|ftp):\/\/[^\s\/$.?#].[^\s]*`)
+var embedRegex = regexp.MustCompile(`https?:\/\/[^\s\/$.?#].[^\s]*`)
 
 func main() {
 	// Load the .env file.
