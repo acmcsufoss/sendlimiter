@@ -48,6 +48,11 @@ func main() {
 			return
 		}
 
+		// Delete the message.
+		if err := s.DeleteMessage(m.ChannelID, m.ID, "No attachments"); err != nil {
+			log.Println("Failed to delete message:", err)
+		}
+
 		// Send a DM to the user.
 		channel, err := s.CreatePrivateChannel(m.Author.ID)
 		if err != nil {
@@ -65,11 +70,6 @@ func main() {
 			Content: m.Content,
 		}); err != nil {
 			log.Println("Failed to send message:", err)
-		}
-
-		// Delete the message.
-		if err := s.DeleteMessage(m.ChannelID, m.ID, "No attachments"); err != nil {
-			log.Println("Failed to delete message:", err)
 		}
 	}
 
